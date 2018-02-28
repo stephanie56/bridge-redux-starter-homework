@@ -1,13 +1,19 @@
 import {combineReducers} from 'redux';
 
-import {generateProducts} from '../utils/data';
+import {generateProducts, chance} from '../utils/data';
 import {ACTION_TYPES} from '../actions';
-
 
 // you'll notice I set my initial state below on line 13 to equal this object! This is a common pattern
 const INITIAL_STATE = {
-    productList: generateProducts(10),
-    searchString: '' // hint for optional homework
+  productList: generateProducts(10),
+  product: {
+    id: chance.guid(),
+    name: '',
+    department: '',
+    price: 0,
+    stock: 0,
+    type: '',
+  }
 };
 
 export const products = (state = INITIAL_STATE, {type, payload}) => {
@@ -17,6 +23,18 @@ export const products = (state = INITIAL_STATE, {type, payload}) => {
             return {...state, productList: state.productList.concat(payload.product)};
         case ACTION_TYPES.removeProduct:
             return {...state, productList: state.productList.filter(prod => prod.id !== payload)};
+        case ACTION_TYPES.submitForm:
+            return {...state, productList: state.productList.concat(state.product)};
+        case ACTION_TYPES.updateName:
+            return {...state, product: {...state.product, name: payload}};
+        case ACTION_TYPES.updateDepartment:
+            return {...state, product: {...state.product, department: payload}};
+        case ACTION_TYPES.updatePrice:
+            return {...state, product: {...state.product, price: payload}};
+        case ACTION_TYPES.updateStock:
+            return {...state, product: {...state.product, stock: payload}};
+        case ACTION_TYPES.updateType:
+            return {...state, product: {...state.product, type: payload}};
     }
     return state;
 };

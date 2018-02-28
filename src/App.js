@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {connect} from 'react-redux';
-import {addProduct, removeProduct} from './actions/index';
+import {addProduct, removeProduct, submitForm, updateName, updateType, updatePrice, updateStock, updateDepartment} from './actions/index';
 import Chance from 'chance';
 
 export const chance = Chance();
@@ -18,11 +18,20 @@ const Product = ({id, name, remove}) => {
 
 const DaBest = ({name}) => <h1>The Best: {name}</h1>;
 
-const AdderButton = ({add}) => <button onClick={() => add({name: 'Sofa'})}>Add Sofa</button>
+const AdderButton = ({add}) => <button onClick={() => add({name: 'Sofa'})}>Add Sofa</button>;
 
-// const DeleteButton = ({delete}) => <button onClick={(props) => delete(props.id)}>Delete Product</button>
-
-// const ProductWithDeleteButton = () => {}
+const Form = ({submitForm, updateName, updateDepartment, updateType, updateStock, updatePrice}) => {
+  return (
+    <div>
+      <div>name: <input type="text" onChange={(e) => updateName(e.target.value)}/></div>
+      <div>department: <input type="text" onChange={(e) => updateName(e.target.value)}/></div>
+      <div>price: <input type="text" onChange={(e) => updateName(e.target.value)}/></div>
+      <div>stock: <input type="text" onChange={(e) => updateName(e.target.value)}/></div>
+      <div>type: <input type="text" onChange={(e) => updateName(e.target.value)}/></div>
+      <button onClick={() => submitForm()}>Submit Product</button>
+    </div>
+  )
+};
 
 class App extends Component {
 
@@ -50,6 +59,8 @@ class App extends Component {
         {productList.map(product => <Product name={product.name} key={product.id} id={product.id} remove={remove}/>)}
 
         <AdderButton {...this.props} />
+        <hr />
+        <Form {...this.props}/>
       </div>
     );
   }
@@ -71,6 +82,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   add: addProduct,
   remove: removeProduct,
+  submitForm,
+  updateName,
+  updateType,
+  updatePrice,
+  updateStock,
+  updateDepartment
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
