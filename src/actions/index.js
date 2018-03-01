@@ -3,6 +3,7 @@ export const ACTION_TYPES = {
   removeProduct: 'REMOVE_PRODUCTS',
   submitForm: 'SUBMIT_FORM',
   updateProduct: 'UPDATE_PRODUCT',
+  updateSearchTerm: 'UPDATE_SEARCHTERM'
 };
 
 export function addProduct(product) {
@@ -32,5 +33,12 @@ export function updateProduct(label, val) {
     type: ACTION_TYPES.updateProduct,
     label,
     val
+  }
+}
+
+export function updateSearchTerm(term) {
+  return {
+    type: ACTION_TYPES.updateSearchTerm,
+    payload: term
   }
 }

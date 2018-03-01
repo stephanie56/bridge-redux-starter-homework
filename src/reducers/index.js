@@ -6,6 +6,7 @@ import {ACTION_TYPES} from '../actions';
 // you'll notice I set my initial state below on line 13 to equal this object! This is a common pattern
 const INITIAL_STATE = {
   productList: generateProducts(10),
+  searchTerm: '',
   product: {
     id: chance.guid(),
     name: '',
@@ -27,6 +28,8 @@ export const products = (state = INITIAL_STATE, {type, payload, label, val}) => 
             return {...state, productList: state.productList.concat(state.product)};
         case ACTION_TYPES.updateProduct:
             return {...state, product: {...state.product, [label]: val}};
+        case ACTION_TYPES.updateSearchTerm:
+            return {...state, searchTerm: state.searchTerm.concat(payload)};
     }
     return state;
 };
