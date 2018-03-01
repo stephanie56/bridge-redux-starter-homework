@@ -1,41 +1,20 @@
 import React, {Component} from 'react';
 import './App.css';
 import {connect} from 'react-redux';
-import {addProduct, removeProduct, submitForm, updateName, updateType, updatePrice, updateStock, updateDepartment} from './actions/index';
+import {addProduct, removeProduct, submitForm, updateProduct} from './actions/index';
 import Chance from 'chance';
+
+import { Form } from './components/Form';
+import { Product } from './components/Product';
 
 export const chance = Chance();
 
-const Product = ({id, name, remove}) => {
-  debugger;
-  return (
-    <div>
-      {name}
-      <button onClick={() => remove(id)}>Delete Product</button>
-    </div>
-  );
-};
 
 const DaBest = ({name}) => <h1>The Best: {name}</h1>;
 
 const AdderButton = ({add}) => <button onClick={() => add({name: 'Sofa'})}>Add Sofa</button>;
 
-const Form = ({submitForm, updateName, updateDepartment, updateType, updateStock, updatePrice}) => {
-  return (
-    <div>
-      <div>name: <input type="text" onChange={(e) => updateName(e.target.value)}/></div>
-      <div>department: <input type="text" onChange={(e) => updateName(e.target.value)}/></div>
-      <div>price: <input type="text" onChange={(e) => updateName(e.target.value)}/></div>
-      <div>stock: <input type="text" onChange={(e) => updateName(e.target.value)}/></div>
-      <div>type: <input type="text" onChange={(e) => updateName(e.target.value)}/></div>
-      <button onClick={() => submitForm()}>Submit Product</button>
-    </div>
-  )
-};
-
 class App extends Component {
-
-
   constructor(props) {
     super(props);
   }
@@ -56,7 +35,7 @@ class App extends Component {
     return (
       <div>
         <DaBest name={whoIsTheBest}/>
-        {productList.map(product => <Product name={product.name} key={product.id} id={product.id} remove={remove}/>)}
+        {productList.map(product => <Product key={product.id} remove={remove} {...product}/>)}
 
         <AdderButton {...this.props} />
         <hr />
@@ -83,11 +62,7 @@ const mapDispatchToProps = {
   add: addProduct,
   remove: removeProduct,
   submitForm,
-  updateName,
-  updateType,
-  updatePrice,
-  updateStock,
-  updateDepartment
+  updateProduct
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

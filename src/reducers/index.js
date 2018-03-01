@@ -16,7 +16,7 @@ const INITIAL_STATE = {
   }
 };
 
-export const products = (state = INITIAL_STATE, {type, payload}) => {
+export const products = (state = INITIAL_STATE, {type, payload, label, val}) => {
     switch (type) {
         case ACTION_TYPES.addProduct:
             // using object spread, I am saying - I want to return the old state, except change the productList property
@@ -25,16 +25,8 @@ export const products = (state = INITIAL_STATE, {type, payload}) => {
             return {...state, productList: state.productList.filter(prod => prod.id !== payload)};
         case ACTION_TYPES.submitForm:
             return {...state, productList: state.productList.concat(state.product)};
-        case ACTION_TYPES.updateName:
-            return {...state, product: {...state.product, name: payload}};
-        case ACTION_TYPES.updateDepartment:
-            return {...state, product: {...state.product, department: payload}};
-        case ACTION_TYPES.updatePrice:
-            return {...state, product: {...state.product, price: payload}};
-        case ACTION_TYPES.updateStock:
-            return {...state, product: {...state.product, stock: payload}};
-        case ACTION_TYPES.updateType:
-            return {...state, product: {...state.product, type: payload}};
+        case ACTION_TYPES.updateProduct:
+            return {...state, product: {...state.product, [label]: val}};
     }
     return state;
 };

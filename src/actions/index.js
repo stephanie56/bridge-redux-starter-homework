@@ -2,11 +2,7 @@ export const ACTION_TYPES = {
   addProduct: 'ADD_PRODUCTS',
   removeProduct: 'REMOVE_PRODUCTS',
   submitForm: 'SUBMIT_FORM',
-  updateName: 'UPDATE_NAME',
-  updateDepartment: 'UPDATE_DEPARTMENT',
-  updatePrice: 'UPDATE_PRICE',
-  updateStock: 'UPDATE_STOCK',
-  updateType: 'UPDATE_TYPE',
+  updateProduct: 'UPDATE_PRODUCT',
 };
 
 export function addProduct(product) {
@@ -31,37 +27,10 @@ export function submitForm() {
   }
 }
 
-export function updateName(val) {
+export function updateProduct(label, val) {
   return {
-    type: ACTION_TYPES.updateName,
-    payload: val
-  }
-}
-
-export function updateDepartment(val) {
-  return {
-    type: ACTION_TYPES.updateDepartment,
-    payload: val
-  }
-}
-
-export function updatePrice(val) {
-  return {
-    type: ACTION_TYPES.updatePrice,
-    payload: val
-  }
-}
-
-export function updateStock(val) {
-  return {
-    type: ACTION_TYPES.updateStock,
-    payload: val
-  }
-}
-
-export function updateType(val) {
-  return {
-    type: ACTION_TYPES.updateType,
-    payload: val
+    type: ACTION_TYPES.updateProduct,
+    label,
+    val
   }
 }
