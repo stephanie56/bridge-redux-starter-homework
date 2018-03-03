@@ -21,6 +21,17 @@ const SearchBar = ({searchTerm, updateSearchTerm}) => {
   );
 };
 
+const EnhancedProductList = ({searchTerm, filteredProducts, productList, remove}) => {
+  const products = searchTerm.length > 0 ? filteredProducts : productList;
+  return (
+    <div>
+      {
+        products.map(product => <Product key={product.id} remove={remove} {...product}/>)
+      }
+    </div>
+  );
+};
+
 const DaBest = ({name}) => <h1>The Best: {name}</h1>;
 
 const AdderButton = ({add}) => <button onClick={() => add({name: 'Sofa'})}>Add Sofa</button>;
@@ -41,17 +52,13 @@ class App extends Component {
   }
 
   render() {
-    const {productList, searchTerm, filteredProducts, add, remove, whoIsTheBest, updateSearchTerm} = this.props;
+    const {whoIsTheBest, productList, searchTerm, filteredProducts, add, remove, updateSearchTerm} = this.props;
     debugger;
     return (
       <div>
         <SearchBar {...this.props} />
         <DaBest name={whoIsTheBest}/>
-        {
-          searchTerm.length > 0 ?
-          filteredProducts.map(product => <Product key={product.id} remove={remove} {...product}/>) :
-          productList.map(product => <Product key={product.id} remove={remove} {...product}/>)
-        }
+        <EnhancedProductList {...this.props}/>
         <AdderButton {...this.props} />
         <hr />
         <Form {...this.props}/>
