@@ -13,7 +13,10 @@ const SearchBar = ({searchTerm, updateSearchTerm}) => {
   return (
     <input type="text"
       value={searchTerm}
-      onChange={(e) => updateSearchTerm(e.target.value)}
+      onChange={(e) => {
+        updateSearchTerm(e.target.value);
+        }
+      }
     />
   );
 };
@@ -38,11 +41,11 @@ class App extends Component {
   }
 
   render() {
-    const {productList, searchTerm, filteredProducts, add, remove, whoIsTheBest} = this.props;
+    const {productList, searchTerm, filteredProducts, add, remove, whoIsTheBest, updateSearchTerm} = this.props;
     debugger;
     return (
       <div>
-        <SearchBar searchTerm={searchTerm} updateSearchTerm={updateSearchTerm} />
+        <SearchBar {...this.props} />
         <DaBest name={whoIsTheBest}/>
         {
           searchTerm.length > 0 ?

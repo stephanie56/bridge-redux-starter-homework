@@ -29,7 +29,7 @@ export const products = (state = INITIAL_STATE, {type, payload, label, val}) => 
         case ACTION_TYPES.updateProduct:
             return {...state, product: {...state.product, [label]: val}};
         case ACTION_TYPES.updateSearchTerm:
-            return {...state, searchTerm: state.searchTerm.concat(payload)};
+            return {...state, searchTerm: payload};
     }
     return state;
 };

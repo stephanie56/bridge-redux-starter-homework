@@ -3,7 +3,7 @@ export const ACTION_TYPES = {
   removeProduct: 'REMOVE_PRODUCTS',
   submitForm: 'SUBMIT_FORM',
   updateProduct: 'UPDATE_PRODUCT',
-  updateSearchTerm: 'UPDATE_SEARCHTERM'
+  updateSearchTerm: 'UPDATE_SEARCHTERM',
 };
 
 export function addProduct(product) {
